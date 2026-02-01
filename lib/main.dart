@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Placeholder(),
+      body: const Placeholder(), // replace the place holder with Idea Stream
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigator.pushNamed(context, '/add');
