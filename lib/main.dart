@@ -6,8 +6,8 @@ import 'screens/idea_screen.dart';
 
 void main() async {
   // TODO: 1. Flutter bindings and Firebase Initialization
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -31,8 +31,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
-      home: MyHomePage(title: "Idea Board"), //You Have to Remove this first
+      // home: MyHomePage(title: "Idea Board"), //You Have to Remove this first
       // TODO: 2. Change this to Routes
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: "Idea Board"),
+        '/add': (context) => AddScreen(),
+      },
     );
   }
 }
@@ -57,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Placeholder(), // replace the place holder with Idea Stream
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.pushNamed(context, '/add');
+          Navigator.pushNamed(context, '/add');
         },
         tooltip: 'Add Idea',
         child: const Icon(Icons.add),
