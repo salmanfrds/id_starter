@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139836106124",
+    "project_id": "ideaboard-15292",
+    "storage_bucket": "ideaboard-15292.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139836106124:android:362c2e3f7d30c3773e22a9",
+        "android_client_info": {
+          "package_name": "com.example.id_starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs15-c89fHw7jW8JARt9gKqzWvfk_SJk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

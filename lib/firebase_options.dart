@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,18 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDlBOXhKOylW5t7ErQKnclMCCiKDZJGWyg',
-    appId: '1:139836106124:web:23ba3aaf9e88e65e3e22a9',
-    messagingSenderId: '139836106124',
-    projectId: 'ideaboard-15292',
-    authDomain: 'ideaboard-15292.firebaseapp.com',
-    storageBucket: 'ideaboard-15292.firebasestorage.app',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDs15-c89fHw7jW8JARt9gKqzWvfk_SJk8',
-    appId: '1:139836106124:android:d55260ac59127a4c3e22a9',
+    appId: '1:139836106124:android:362c2e3f7d30c3773e22a9',
     messagingSenderId: '139836106124',
     projectId: 'ideaboard-15292',
     storageBucket: 'ideaboard-15292.firebasestorage.app',
@@ -59,28 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDCYlF4FJ2eA44D37vkjUMrUqeJcuzDGcA',
-    appId: '1:139836106124:ios:b47cd799fabffdc73e22a9',
+    appId: '1:139836106124:ios:26a70aa70fdeb6323e22a9',
     messagingSenderId: '139836106124',
     projectId: 'ideaboard-15292',
     storageBucket: 'ideaboard-15292.firebasestorage.app',
-    iosBundleId: 'com.example.idea',
+    iosBundleId: 'com.example.idStarter',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDCYlF4FJ2eA44D37vkjUMrUqeJcuzDGcA',
-    appId: '1:139836106124:ios:b47cd799fabffdc73e22a9',
-    messagingSenderId: '139836106124',
-    projectId: 'ideaboard-15292',
-    storageBucket: 'ideaboard-15292.firebasestorage.app',
-    iosBundleId: 'com.example.idea',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDlBOXhKOylW5t7ErQKnclMCCiKDZJGWyg',
-    appId: '1:139836106124:web:79c3ad60b00f53b73e22a9',
-    messagingSenderId: '139836106124',
-    projectId: 'ideaboard-15292',
-    authDomain: 'ideaboard-15292.firebaseapp.com',
-    storageBucket: 'ideaboard-15292.firebasestorage.app',
-  );
 }

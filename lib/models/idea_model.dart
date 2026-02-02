@@ -8,7 +8,7 @@ class IdeaModel {
   // TODO: 5. Create a factory constructor to parse JSON data
   factory IdeaModel.fromMap(Map<String, dynamic> map) {
     return IdeaModel(
-      title: map['title'] as String? ?? "No Title",
+      title: map['title'] as String? ?? "No Title", 
       description: map['description'] as String? ?? "No Description",
     );
   }
