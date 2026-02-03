@@ -58,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: const IdeaStream(), // replace the place holder with Idea Stream
       floatingActionButton: FloatingActionButton(
