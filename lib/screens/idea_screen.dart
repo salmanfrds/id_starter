@@ -5,56 +5,63 @@ import '../models/idea_model.dart';
 class IdeaStream extends StatelessWidget {
   const IdeaStream({super.key});
 
-  // TODO: 11. Implement the delete functionality
-  Future<void> _deleteIdea(String id) async {
-    await FirebaseFirestore.instance.collection('ideaBoard').doc(id).delete();
-  }
-
   @override
   Widget build(BuildContext context) {
     // TODO: 6. Initialize the StreamBuilder to listen to the 'ideaBoard' collection
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('ideaBoard')
-          .orderBy('createdAt', descending: true)
-          .snapshots(),
-      builder: (context, snapshot) {
+    final docsSnapshot = FirebaseFirestore.instance.collection('ideaBoard').orderBy('createdAt', descending: true).snapshots();
+
+    return StreamBuilder(
+      stream: docsSnapshot, 
+      builder: (context, snapshot){
         // TODO: 7. Check for connection state and errors
-        if (snapshot.hasError) return const Center(child: Text("Error"));
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
+        if(snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+        if(snapshot.hasError) return const Center(child: Text('error'));
 
-        // TODO: 8. Parse the query snapshot into a list of IdeaModel objects
-        final docs = snapshot.data!.docs;
+        final docsMap = snapshot.data!.docs;
 
+        // TODO: 9. Build the ListView to display the ideas
         return ListView.builder(
-          // TODO: 9. Build the ListView to display the ideas
-          itemCount: docs.length,
-          itemBuilder: (context, index) {
-            final data = docs[index].data() as Map<String, dynamic>;
-            final idea = IdeaModel.fromMap(data);
-
-            // TODO: 10. The Card Widget
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: ListTile(
-                title: Text(
-                  idea.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(idea.description),
-                trailing: IconButton(
-                  onPressed: () {
-                    _deleteIdea(docs[index].id);
-                  },
-                  icon: Icon(Icons.delete),
-                ),
-              ),
-            );
-          },
+          itemCount: docsMap.length,
+          itemBuilder: (context, index){
+            final docMap = docsMap[index];
+            final docModel = IdeaModel.fromMap(docMap.data());
+            return IdeaWidget(title: docModel.title, subtitle: docModel.description, id: docMap.id);
+          }
         );
-      },
+      }
     );
   }
 }
+
+// TODO: 10. The Card Widget
+class IdeaWidget extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String id;
+  const IdeaWidget({
+    super.key, required this.title, required this.subtitle, required this.id
+  });
+
+  // TODO: 11. Implement the delete functionality
+  Future<void> deleteIdea(String id) async {
+     await FirebaseFirestore.instance.collection('ideaBoard').doc(id).delete(); 
+  } 
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        title: Text(title),
+        subtitle: Text(subtitle),
+        trailing: IconButton(
+          onPressed: () {
+            deleteIdea(id);
+          }, 
+          icon: Icon(Icons.delete)
+        ),
+      ),
+    );
+  }
+}
+ 
